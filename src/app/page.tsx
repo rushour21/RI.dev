@@ -11,6 +11,7 @@ import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
 import AiChat from "@/components/AiChat";
 import Education from "@/components/Education";
+import GetInTouch from "@/components/GetInTouch";
 import Footer from "@/components/Footer";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
@@ -48,6 +49,7 @@ export default function Home() {
         <Projects />
         <Experience />
         <Education />
+        <GetInTouch />
       </main>
       <Footer />
       <AiChat />

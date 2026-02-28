@@ -51,14 +51,14 @@ export const skills = [
     items: ["Node.js", "Express.js", "Rest API", "Socket.io"],
   },
   {
-    category: "Database",
+    category: "Databases & ORM",
     icon: "Database",
-    items: ["PostgreSQL", "MongoDB", "Prisma", "Qdrant"],
+    items: ["PostgreSQL", "MongoDB", "Prisma ORM", "Qdrant"],
   },
   {
     category: "AI / RAG",
     icon: "Bot",
-    items: ["OpenAI API", "Hugging Face", "Pinecone"],
+    items: ["OpenAI sdk", "LangChain", "RAG Systems"],
   },
   {
     category: "DevOps",

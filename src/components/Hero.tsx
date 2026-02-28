@@ -39,7 +39,6 @@ export default function Hero() {
             </svg>
             Resume
           </a>
-          <a href="mailto:rushabh.ingle2111@gmail.com" className="btn-ghost">Get in Touch</a>
         </div>
       </div>
 
@@ -71,7 +70,7 @@ export default function Hero() {
               <Zap size={16} />
             </div>
             <div>
-              <div className="orb-stat-val">1yr+</div>
+              <div className="orb-stat-val">1yr</div>
               <div className="orb-stat-label">Experience</div>
             </div>
           </div>

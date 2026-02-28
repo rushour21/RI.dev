@@ -2448,4 +2448,105 @@ footer {
   .topbar-nav {
     display: none;
   }
+
+  .contact-list {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* CONTACT SECTION */
+.getin-touch-section {
+
+}
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 600px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  group: "contact";
+}
+
+.contact-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(99, 180, 255, 0.1),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.contact-item:hover {
+  border-color: var(--border-bright);
+  background: var(--surface);
+}
+
+.contact-item:hover::before {
+  opacity: 1;
+}
+
+.contact-item:hover .contact-arrow {
+  transform: translateX(4px);
+  color: var(--accent2);
+}
+
+.contact-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  border-radius: 8px;
+  color: var(--accent2);
+  flex-shrink: 0;
+}
+
+.contact-info {
+  flex: 1;
+}
+
+.contact-label {
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.contact-value {
+  font-size: 16px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.contact-arrow {
+  width: 16px;
+  height: 16px;
+  color: var(--text-dim);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
 }
