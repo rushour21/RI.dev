@@ -3,8 +3,11 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { User, Send, X } from "lucide-react";
 import Image from "next/image";
-import { getBotReply } from "@/data/portfolio";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
 import botIcon from "@/assets/Graident Ai Robot.png";
+
 
 interface Message {
   id: number;
@@ -41,26 +44,56 @@ export default function AiChat() {
   };
 
   const sendMessage = useCallback(
-    (text: string) => {
+    async (text: string) => {
       if (!text.trim() || isTyping) return;
       setInputVal("");
 
-      setMessages((prev) => [...prev, { id: ++msgId, type: "user", text }]);
+      const newUserMsg: Message = { id: ++msgId, type: "user", text };
+      setMessages((prev) => [...prev, newUserMsg]);
       setIsTyping(true);
       scrollDown();
 
-      const delay = 1000 + Math.random() * 800;
-      setTimeout(() => {
-        setIsTyping(false);
+      try {
+        // Map UI messages to format expected by API
+        const apiMessages = messages
+          .filter(m => m.type !== 'bot' || m.id !== 1) // Optional: filter out initial greeting if desired
+          .map(m => ({
+            role: m.type === 'user' ? 'user' : 'assistant',
+            content: m.text
+          }));
+
+        apiMessages.push({ role: 'user', content: text });
+
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: apiMessages }),
+        });
+
+        const data = await response.json();
+
+        if (data.reply) {
+          setMessages((prev) => [
+            ...prev,
+            { id: ++msgId, type: "bot", text: data.reply },
+          ]);
+        } else {
+          throw new Error(data.error || "No reply from AI");
+        }
+      } catch (error) {
+        console.error("Chat Error:", error);
         setMessages((prev) => [
           ...prev,
-          { id: ++msgId, type: "bot", text: getBotReply(text).replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}👋🤖🚀⚡🔧☁️📁🎓📚📜📧📱📍💼⚙️🎨🗄️🐙🍽️👤]/gu, "") },
+          { id: ++msgId, type: "bot", text: "Sorry, I'm having trouble connecting right now. Please try again later." },
         ]);
+      } finally {
+        setIsTyping(false);
         scrollDown();
-      }, delay);
+      }
     },
-    [isTyping]
+    [isTyping, messages]
   );
+
 
   // Close on Escape
   useEffect(() => {
@@ -130,7 +163,12 @@ export default function AiChat() {
                   <Image src={botIcon} alt="Bot" width={16} height={16} />
                 )}
               </div>
-              <div className="msg-bubble">{msg.text}</div>
+              <div className="msg-bubble">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {msg.text}
+                </ReactMarkdown>
+              </div>
+
             </div>
           ))}
           {isTyping && (
