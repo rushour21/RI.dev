@@ -54,9 +54,10 @@ export default function AiChat() {
       scrollDown();
 
       try {
-        // Map UI messages to format expected by API
+        // Map UI messages to format expected by API (last 15)
         const apiMessages = messages
-          .filter(m => m.type !== 'bot' || m.id !== 1) // Optional: filter out initial greeting if desired
+          .slice(-15)
+          .filter(m => m.type !== 'bot' || m.id !== 1)
           .map(m => ({
             role: m.type === 'user' ? 'user' : 'assistant',
             content: m.text

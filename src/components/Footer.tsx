@@ -11,10 +11,10 @@ export default function Footer() {
         <a href="tel:+919130257202" className="footer-link">
           <Phone size={14} /> +91 9130257202
         </a>
-        <a href="#" className="footer-link">
+        <a href="https://www.linkedin.com/in/rushabh-ingle" className="footer-link">
           <Linkedin size={14} /> LinkedIn
         </a>
-        <a href="#" className="footer-link">
+        <a href="https://github.com/rushour21" className="footer-link">
           <Github size={14} /> GitHub
         </a>
       </div>
