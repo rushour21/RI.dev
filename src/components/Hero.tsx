@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { heroTags } from "@/data/portfolio";
+import profile from "@/assets/rrr21.png";
 
 import { Zap, Rocket, Wrench, Cloud } from "lucide-react";
 
@@ -55,7 +56,7 @@ export default function Hero() {
             <div className="hero-profile-ring hero-profile-ring--2" />
             <div className="hero-profile-img-border">
               <Image
-                src="/assets/profile.png"
+                src={profile} 
                 alt="Rushabh Ingle"
                 width={220}
                 height={220}
