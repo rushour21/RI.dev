@@ -6,7 +6,7 @@ import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-import botIcon from "@/assets/Graident Ai Robot.png";
+import botIcon from "@/assets/avatart.png";
 
 
 interface Message {
@@ -123,7 +123,7 @@ export default function AiChat() {
         {isOpen ? (
           <X size={24} />
         ) : (
-          <Image src={botIcon} alt="AI Chatbot" width={40} height={40} className="chat-toggle-icon" />
+          <Image src={botIcon} alt="AI Chatbot" width={60} height={60} className="chat-toggle-icon" />
         )}
       </button>
 
@@ -131,7 +131,7 @@ export default function AiChat() {
       <div className="chat-window shadow-xl">
         <div className="chat-header">
           <div className="ai-avatar">
-            <Image src={botIcon} alt="AI Avatar" width={28} height={28} />
+            <Image src={botIcon} alt="AI Avatar" width={48} height={48} />
           </div>
           <div className="chat-header-info">
             <div className="name">Portfolio AI</div>
@@ -159,9 +159,9 @@ export default function AiChat() {
             <div key={msg.id} className={`msg ${msg.type}`}>
               <div className="msg-avatar">
                 {msg.type === "user" ? (
-                  <User size={14} />
+                  <User size={18} />
                 ) : (
-                  <Image src={botIcon} alt="Bot" width={16} height={16} />
+                  <Image src={botIcon} alt="Bot" width={24} height={24} />
                 )}
               </div>
               <div className="msg-bubble">
@@ -175,7 +175,7 @@ export default function AiChat() {
           {isTyping && (
             <div className="msg bot">
               <div className="msg-avatar">
-                <Image src={botIcon} alt="Bot" width={16} height={16} />
+                <Image src={botIcon} alt="Bot" width={24} height={24} />
               </div>
               <div className="msg-bubble">
                 <div className="typing-indicator">

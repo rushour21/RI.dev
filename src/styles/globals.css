@@ -221,14 +221,31 @@ body::after {
 }
 
 .topbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-family: 'Syne', sans-serif;
   font-weight: 800;
   font-size: 18px;
+  letter-spacing: -0.5px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.topbar-logo:hover {
+  opacity: 0.85;
+}
+
+.topbar-logo span {
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  letter-spacing: -0.5px;
+}
+
+.logo-img {
+  border-radius: 4px;
+  filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.3));
 }
 
 .topbar-nav {
@@ -2033,8 +2050,8 @@ main {
 
 /* Toggle Button */
 .chat-toggle {
-  width: 56px;
-  height: 56px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   background: transparent;
   border: none;
@@ -2048,8 +2065,8 @@ main {
 }
 
 .chat-toggle-icon {
-  width: 56px;
-  height: 56px;
+  width: 72px;
+  height: 72px;
   object-fit: contain;
   filter: drop-shadow(0 8px 16px rgba(59, 130, 246, 0.3));
 }
@@ -2106,8 +2123,8 @@ main {
 }
 
 .ai-avatar {
-  width: 36px;
-  height: 36px;
+  width: 54px;
+  height: 54px;
   background: transparent;
   display: flex;
   align-items: center;
@@ -2116,8 +2133,8 @@ main {
 }
 
 .ai-avatar img {
-  width: 32px;
-  height: 32px;
+  width: 48px;
+  height: 48px;
   object-fit: contain;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
 }
@@ -2178,8 +2195,8 @@ main {
 }
 
 .msg-avatar {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2188,8 +2205,8 @@ main {
 }
 
 .msg-avatar img {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   object-fit: contain;
 }
 

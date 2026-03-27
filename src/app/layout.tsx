@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   description:
     "Full Stack Developer specializing in Node.js, React, Next.js, and AI/RAG systems. Building scalable web applications, REST APIs, and intelligent SaaS platforms.",
   keywords: ["Full Stack Developer", "Node.js", "React", "Next.js", "AI", "RAG", "Pune"],
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
