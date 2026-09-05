@@ -9,6 +9,10 @@
 # next.js
 /.next/
 /out/
+.claude
+.claude/
+.vscode
+.vscode/
 
 # production
 /build

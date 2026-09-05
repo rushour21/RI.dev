@@ -40,6 +40,7 @@ export default function Projects() {
           const showMono = isWip && !p.image;
           return (
             <div key={p.title} className="project-panel" style={{ zIndex: idx + 1 }}>
+              <div className="project-panel-card">
               <div className="project-panel-inner">
                 <div className="project-panel-info">
                   <div className="project-panel-index">
@@ -120,6 +121,7 @@ export default function Projects() {
                   </div>
                   <div className="project-panel-caption">{p.title.toUpperCase()} / PREVIEW</div>
                 </div>
+              </div>
               </div>
             </div>
           );
