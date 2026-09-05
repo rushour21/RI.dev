@@ -1,8 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Cursor from "@/components/Cursor";
-import BootScreen from "@/components/BootScreen";
+import { useEffect, useState } from "react";
 import Topbar from "@/components/Topbar";
 import Hero from "@/components/Hero";
 import Skills from "@/components/Skills";
@@ -16,31 +14,16 @@ import Footer from "@/components/Footer";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export default function Home() {
-  const [booted, setBooted] = useState(false);
   const [topbarVisible, setTopbarVisible] = useState(false);
 
   useScrollReveal();
 
-  const handleBootComplete = () => {
-    setBooted(true);
-    setTopbarVisible(true);
-  };
-
-  // Parallax on hero glow
   useEffect(() => {
-    const handleScroll = () => {
-      const y = window.scrollY;
-      const glow = document.querySelector<HTMLElement>(".hero-glow");
-      if (glow) glow.style.transform = `translateY(calc(-50% + ${y * 0.3}px))`;
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    setTopbarVisible(true);
   }, []);
 
   return (
     <>
-      <Cursor />
-      {!booted && <BootScreen onComplete={handleBootComplete} />}
       <Topbar visible={topbarVisible} />
       <main>
         <Hero />

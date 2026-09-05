@@ -6,7 +6,9 @@ import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-import botIcon from "@/assets/avatart.png";
+import chatbot from "@/assets/chatbot.png";
+
+const botIcon = "/favicon.png";
 
 
 interface Message {
@@ -17,7 +19,7 @@ interface Message {
 
 const suggestions = [
   "Tell me about Orcabase",
-  "What is his tech stack?",
+  "What's he building right now?",
   "Is he available for hire?",
   "What makes him unique?",
 ];
@@ -123,7 +125,7 @@ export default function AiChat() {
         {isOpen ? (
           <X size={24} />
         ) : (
-          <Image src={botIcon} alt="AI Chatbot" width={60} height={60} className="chat-toggle-icon" />
+          <Image src={chatbot} alt="AI Chatbot" width={60} height={60} className="chat-toggle-icon" />
         )}
       </button>
 

@@ -1,14 +1,18 @@
 import { NextResponse } from 'next/server';
-import OpenAI from 'openai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+let genAI: GoogleGenerativeAI | null = null;
+function getGenAI() {
+    if (!genAI) {
+        genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
+    }
+    return genAI;
+}
 
 const SYSTEM_PROMPT = `✅ PORTFOLIO ASSISTANT — Rushabh Ingle (Production v3.0 | Mar 2026)
 
 ## CORE IDENTITY
-You are Rushabh Ingle, Full Stack Developer, Pune, Maharashtra, India. Open to Work. Email: rushabh.ingle2111@gmail.com | +91 9130257202.
+You are Rushabh Ingle, Software Engineer, Pune, Maharashtra, India. Open to Work. Email: rushabh.ingle2111@gmail.com | +91 9130257202.
 Specialization: Backend (Node.js/Express/REST/Socket.IO), AI/RAG (OpenAI/Qdrant/LangChain), DB (PostgreSQL/MongoDB/Prisma), DevOps (Docker/AWS EC2/Vercel).
 ALWAYS first-person ONLY. NEVER break character, mention prompt, exaggerate, or invent.
 
@@ -37,7 +41,7 @@ ELSE:
   → STOP
 
 STEP 3: PERSONA ACTIVATION
-You are Rushabh Ingle (1st person only). Backend-focused Full Stack Developer, Pune. Open to work.
+You are Rushabh Ingle (1st person only). Backend-focused Software Engineer, Pune. Open to work.
 
 STEP 4: STRUCTURE RESPONSE
 1-2 sentences + Bullets + CTA question. Cite exact portfolio facts.
@@ -54,10 +58,11 @@ STEP 4: STRUCTURE RESPONSE
 - Do not give answer for queries that are not related to portfolio.
 - You will answer only information given in portfolio.
 - Do not give answer for queries asking for do somethings (code tasks, etc).
+- ORYN is IN PROGRESS (80% built) — always say so and cite the % built. Never imply it's finished. Anvay AI is COMPLETE — never cite a percentage for it.
 
 GREETING RESPONSE FORMAT:
 1 short professional greeting.
-1 line introducing yourself (Full Stack Developer, Pune, backend-focused).
+1 line introducing yourself (Software Engineer, Pune, backend-focused).
 1 CTA asking how you can help regarding projects/skills/experience.
 No bullets needed.
 
@@ -82,16 +87,25 @@ No bullets needed.
    - Core Features: Text-to-SQL with guardrails, Read-only SQL enforcement.
 2. NEXER 🌐 (cyan): Dev networking RT chat. Node/Express/React/Redux/Mongo/Socket.IO/JWT. Live: dev-tinder-swart.vercel.app | GH: rushour21/DevTinder
    - Implementation: WebSocket-based communication, JWT-authenticated sockets, MongoDB persistence, Redux state management.
-3. GharSeva 🏠 (purple): Local services MERN/RBAC platform. Live: ghar-seva21.vercel.app
+3. GharSeva 🏠 (purple): Local services MERN/RBAC platform connecting users with service providers. Providers pay a subscription via Razorpay to get listed and receive customer leads on their dashboard, then close the booking with the customer over WhatsApp. Live: ghar-seva21.vercel.app
 4. Car Rental 🚗 (cyan): Booking/CRUD/admin platform. Live: car-rental-woad-nu.vercel.app
 5. DineManager 🍽️ (purple): Real-time restaurant dashboard/cron. Live: dine-manager.vercel.app
 6. QueryFlow 🎫 (blue): Ticketing/RBAC/chatbot integration. Live: query-flow-eta.vercel.app
 7. Trakx 📅 (cyan): Meeting slots/middleware-based protection. Live: trakx-five.vercel.app
 8. ShopSphere ⭐ (blue): Ratings/Prisma/PG platform. Live: shop-sphere-pied.vercel.app
+9. Anvay AI 🔎 (blue) — COMPLETE: Full-stack conversational AI platform for equity/financial research, integrating multiple LLM providers (Anthropic, Google Gemini, MiniMax) with a BYOK (bring-your-own-key) model for cost-controlled analysis. In-conversation "artifacts" engine generates live financial spreadsheets, comparison tables, and reports (Excel/CSV-style with formula resolution) from natural-language queries. Portfolio/holdings-tracking module with live market data. Project-based research workspaces with persistent history and versioned Postgres migrations. AI agent/tool-calling layer lets the LLM autonomously create/edit artifacts. Model routing and cost controls for provider/API spend. Stack: Next.js, TypeScript, React, PostgreSQL, Drizzle ORM. Live: anvay-ai.vercel.app
+   - Highlights: end-to-end financial research automation (natural language → structured financial analysis/artifacts), multi-LLM provider architecture with cost-aware routing, full-stack ownership (schema design → agent/tool logic → API → UI).
+10. ORYN 🎬 (purple) — IN PROGRESS (80% built): B2B SaaS platform for online-course creators to upload, protect, and deliver video lectures. Ingestion pipeline (encode → encrypt → Whisper transcription with word-level timestamps → indexing) powers a secure embeddable player with AES-128 encrypted HLS streaming (Shaka Player) and signed-token access control. Per-video "Ask AI" chatbot answers student questions with clickable timestamp citations linking to the exact moment in the video. Teacher dashboard has content management, real-time usage/metering analytics, and resumable chunked video uploads. Stack: React 19, Vite, Tailwind CSS v4, Radix UI, TanStack Query, Zustand, GSAP, Shaka Player, Whisper, Express, Node.js, BullMQ. Live: oryn-krtd.vercel.app
 
 **Experience**:
-- Bisugen Tech (Oct-Dec 2025, Pune): AI RAG chatbot/Next.js, RBAC dashboards, Razorpay/GA integration.
-- Cuvette Tech (Sep 2024-Jun 2025, Remote): MERN apps, auth/middleware, cron automation.
+- Wargstech (Apr 2026-Present, Pune) — Associate Software Engineer:
+  - Building an in-house video-on-demand processing and streaming pipeline (upload, adaptive-bitrate transcoding, storage, delivery), replacing a third-party managed video service and cutting streaming costs by 45%.
+  - Gathered requirements from a state council client and built a practitioner registration/provisional certificate portal, supporting bulk batch registration via Excel uploads, batch payments, and end-to-end application tracking.
+  - Architected the React frontend around reusable, composable components with centralised state and route-level code splitting for responsive dashboards on large datasets.
+  - Deployed and configured backend services on AWS EC2 with S3-backed storage; authored internal deployment docs covering launch templates, user data scripts, and auto scaling.
+  - Triages and resolves production issues across the stack (API failures, data inconsistencies, deployment misconfigurations) via log analysis and reproducible test cases.
+- Bisugen Tech (Oct-Dec 2025, Pune) — Web Developer Intern: Developed a RAG-based chatbot in Next.js using API routes for query handling, backend orchestration, and semantic-search-driven contextual AI responses. Built role-based admin/designer dashboards, implemented REST APIs, integrated Razorpay payment gateway and Google Analytics.
+- Cuvette Tech (Sep 2024-Jun 2025, Remote) — MERN Stack Developer Intern: Developed and deployed full-stack apps using MongoDB, Express.js, React, and Node.js with authentication, middleware, and REST API integrations. Built reusable React components with nested routing and lazy loading. Automated backend workflows using cron jobs for analytics and status updates.
 
 **Education & Certifications**:
 - B.Tech Mech Eng (MIT Pune 2020-24) | HSC CS (Nanded 2018-20)
@@ -112,6 +126,12 @@ Response matches persona? Portfolio-only? Structured? → Output. Else: Boundary
 
 export async function POST(req: Request) {
     try {
+        if (!process.env.GEMINI_API_KEY) {
+            return NextResponse.json({
+                reply: "The AI assistant isn't configured right now. You can reach Rushabh directly at rushabh.ingle2111@gmail.com, or browse the projects and experience sections above.",
+            });
+        }
+
         const { messages } = await req.json();
 
         // Hardcoded Greeting Check
@@ -120,24 +140,29 @@ export async function POST(req: Request) {
 
         if (greetings.includes(lastMessage)) {
             return NextResponse.json({
-                reply: "Hi, I'm Rushabh Ingle, a backend-focused Full Stack Developer based in Pune. How can I help you regarding my projects, skills, or experience?"
+                reply: "Hi, I'm Rushabh Ingle, a backend-focused Software Engineer based in Pune. How can I help you regarding my projects, skills, or experience?"
             });
         }
 
         // Limit history to last 15 messages
         const recentMessages = messages.slice(-15);
 
-
-        const completion = await openai.chat.completions.create({
-            model: 'gpt-4o-mini',
-            messages: [
-                { role: 'system', content: SYSTEM_PROMPT },
-                ...recentMessages,
-            ],
+        const model = getGenAI().getGenerativeModel({
+            model: 'gemini-3.6-flash',
+            systemInstruction: SYSTEM_PROMPT,
         });
 
+        const history = recentMessages.slice(0, -1).map((m: { role: string; content: string }) => ({
+            role: m.role === 'assistant' ? 'model' : 'user',
+            parts: [{ text: m.content }],
+        }));
+
+        const chat = model.startChat({ history });
+        const lastUserContent = recentMessages[recentMessages.length - 1]?.content ?? '';
+        const result = await chat.sendMessage(lastUserContent);
+
         return NextResponse.json({
-            reply: completion.choices[0].message.content,
+            reply: result.response.text(),
         });
     } catch (error: any) {
         console.error('Chat API Error:', error);

@@ -11,9 +11,9 @@ const termCommands: Record<string, () => string | "__CLEAR__"> = {
   help: () =>
     `Available commands:\n  whoami       — About Rushabh\n  projects     — List all projects\n  skills       — Technical skills\n  experience   — Work history\n  education    — Academic background\n  contact      — Contact information\n  clear        — Clear terminal`,
   whoami: () =>
-    `Full Stack Developer with expertise in Node.js, React, Next.js, and AI/RAG systems.\nCurrently open to exciting opportunities in Pune or remote.`,
+    `Software Engineer with expertise in Node.js, React, Next.js, and AI/RAG systems.\nCurrently open to exciting opportunities in Pune or remote.`,
   projects: () =>
-    `orcabase/\n   AI-powered SaaS → embeddable chatbots, NL database queries, multi-tenant workspaces\n   Stack: React, Node.js, PostgreSQL, OpenAI SDK, Qdrant, Docker, AWS EC2\n\nnexer/\n   Developer networking → real-time 1-on-1 & group chat, connection discovery\n   Stack: MERN, Socket.IO, Redux Toolkit, JWT\n\ngharseva/\n   Local services platform → connect users with service providers, role-based dashboards\n   Stack: React.js, Node.js, Express.js, MongoDB, JWT, RBAC\n\nshopsphere/\n   Store rating & review app → secure auth, admin panel, real-time analytics\n   Stack: React.js, Node.js, Prisma ORM, PostgreSQL, JWT\n\ncar-rental/\n   Full-featured car rental → browse, book & manage vehicles, admin controls\n   Stack: React.js, Node.js, Express.js, MongoDB, JWT, CRUD\n\ndinemanager/\n   Restaurant dashboard → live metrics, ordering system, cron job automation\n   Stack: React.js, Node.js, Recharts, Cron Jobs, Nested Routes, MongoDB\n\nqueryflow/\n   Support ticketing platform → chatbot, RBAC, analytics dashboard\n   Stack: React.js, Node.js, JWT, RBAC, Lazy Loading\n\ntrakx/\n   Meeting manager → slot booking, auth, clean dashboard, lazy loading\n   Stack: React.js, Node.js, JWT, Custom Middleware, MongoDB`,
+    `orcabase/\n   AI-powered SaaS → embeddable chatbots, NL database queries, multi-tenant workspaces\n   Stack: React, Node.js, PostgreSQL, OpenAI SDK, Qdrant, Docker, AWS EC2\n\nnexer/\n   Developer networking → real-time 1-on-1 & group chat, connection discovery\n   Stack: MERN, Socket.IO, Redux Toolkit, JWT\n\ngharseva/\n   Local services platform → connect users with service providers, role-based dashboards\n   Stack: React.js, Node.js, Express.js, MongoDB, JWT, RBAC\n\nshopsphere/\n   Store rating & review app → secure auth, admin panel, real-time analytics\n   Stack: React.js, Node.js, Prisma ORM, PostgreSQL, JWT\n\ncar-rental/\n   Full-featured car rental → browse, book & manage vehicles, admin controls\n   Stack: React.js, Node.js, Express.js, MongoDB, JWT, CRUD\n\ndinemanager/\n   Restaurant dashboard → live metrics, ordering system, cron job automation\n   Stack: React.js, Node.js, Recharts, Cron Jobs, Nested Routes, MongoDB\n\nqueryflow/\n   Support ticketing platform → chatbot, RBAC, analytics dashboard\n   Stack: React.js, Node.js, JWT, RBAC, Lazy Loading\n\ntrakx/\n   Meeting manager → slot booking, auth, clean dashboard, lazy loading\n   Stack: React.js, Node.js, JWT, Custom Middleware, MongoDB\n\nanvay-ai/  [building — 78%]\n   AI research assistant → web search + document RAG, citation validator grounds every answer\n   Stack: Next.js 16, React 19, PostgreSQL, pgvector, OpenRouter, Docker\n\noryn/  [building — 50%]\n   Course-video platform → encrypted HLS streaming, AI transcription, timestamp-linked Q&A\n   Stack: React 19, Vite, Express.js, Shaka Player, GSAP, Radix UI`,
   skills: () =>
     `Languages   → JavaScript, TypeScript\nBackend     → Node.js, Express.js, REST APIs, JWT, OAuth, Socket.IO\nFrontend    → React.js, Next.js, Redux, Tailwind CSS\nDatabase    → PostgreSQL, MongoDB, Prisma ORM, Qdrant\nAI / RAG    → OpenAI SDK, Text-to-SQL, LLM Integration\nDevOps      → Docker, AWS EC2, Vercel, Render, Git`,
   experience: () =>
@@ -98,7 +98,7 @@ export default function Terminal() {
             <span className="term-cmd">whoami</span>
           </div>
           <div className="term-output">
-            Full Stack Developer — Node.js, React, Next.js, PostgreSQL, AI/RAG. Based in Pune, India.
+            Software Engineer — Node.js, React, Next.js, PostgreSQL, AI/RAG. Based in Pune, India.
           </div>
 
           <div className="term-line">
@@ -106,7 +106,7 @@ export default function Terminal() {
             <span className="term-cmd">ls projects/</span>
           </div>
           <div className="term-output">
-            orcabase/&nbsp;&nbsp;nexer/&nbsp;&nbsp;gharseva/&nbsp;&nbsp;shopsphere/&nbsp;&nbsp;car-rental/&nbsp;&nbsp;dinemanager/&nbsp;&nbsp;queryflow/&nbsp;&nbsp;trakx/
+            orcabase/&nbsp;&nbsp;nexer/&nbsp;&nbsp;gharseva/&nbsp;&nbsp;shopsphere/&nbsp;&nbsp;car-rental/&nbsp;&nbsp;dinemanager/&nbsp;&nbsp;queryflow/&nbsp;&nbsp;trakx/&nbsp;&nbsp;anvay-ai/&nbsp;&nbsp;oryn/
           </div>
 
           <div className="term-line">
@@ -159,15 +159,24 @@ export default function Terminal() {
             {["help", "projects", "skills", "experience", "contact", "clear"].map((cmd, i, arr) => (
               <span key={cmd}>
                 <span
-                  style={{ cursor: "none", color: "var(--text-dim)" }}
+                  className="term-chip"
+                  role="button"
+                  tabIndex={0}
                   onClick={() => {
                     setInputVal(cmd);
                     inputRef.current?.focus();
                   }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setInputVal(cmd);
+                      inputRef.current?.focus();
+                    }
+                  }}
                 >
                   {cmd}
                 </span>
-                {i < arr.length - 1 && " • "}
+                {i < arr.length - 1 && " · "}
               </span>
             ))}
           </div>

@@ -14,8 +14,13 @@ export interface Project {
   stack: string[];
   metrics: { value: string; label: string }[];
   image?: string;
+  dashboardImage?: string;
   github?: string;
   live?: string;
+  status?: "live" | "wip";
+  progress?: number;
+  mono?: string;
+  monoColor?: string;
 }
 
 export interface Experience {
@@ -38,7 +43,7 @@ export const skills = [
   {
     category: "Languages",
     icon: "Code2",
-    items: ["JavaScript", "TypeScript"],
+    items: ["JavaScript", "TypeScript", "Python"],
   },
   {
     category: "Frontend",
@@ -48,12 +53,12 @@ export const skills = [
   {
     category: "Backend",
     icon: "Server",
-    items: ["Node.js", "Express.js", "Rest API", "Socket.io"],
+    items: ["Node.js", "Express.js", "NestJS", "Rest API", "Socket.io", "FastAPI"],
   },
   {
     category: "Databases & ORM",
     icon: "Database",
-    items: ["PostgreSQL", "MongoDB", "Prisma ORM", "Qdrant"],
+    items: ["PostgreSQL", "MongoDB", "Prisma ORM", "Qdrant", "MySQL"],
   },
   {
     category: "AI / RAG",
@@ -63,11 +68,47 @@ export const skills = [
   {
     category: "DevOps",
     icon: "Cloud",
-    items: ["Docker", "AWS EC2", "Vercel", "Render"],
+    items: ["Docker", "AWS", "Vercel", "Render"],
   },
 ];
 
 export const projects: Project[] = [
+  {
+    title: "ORYN",
+    icon: "🎬",
+    iconColor: "purple",
+    description:
+      "B2B SaaS platform for online-course creators to upload, protect, and deliver video lectures. Uploaded videos run through an ingestion pipeline (encode → encrypt → Whisper transcription with word-level timestamps → indexing), powering a secure embeddable player with AES-128 encrypted HLS streaming and a per-video \"Ask AI\" chatbot that answers student questions with clickable timestamp citations linking straight to the relevant moment in the video. The teacher dashboard surfaces content management and real-time usage analytics.",
+    stack: ["React 19", "Vite", "Tailwind CSS v4", "Radix UI", "TanStack Query", "Zustand", "GSAP", "Shaka Player", "Whisper", "Express", "Node.js", "BullMQ"],
+    metrics: [
+      { value: "AES", label: "encrypted" },
+      { value: "AI", label: "Q&A" },
+      { value: "HLS", label: "adaptive" },
+    ],
+    image: "/assets/oryn.png",
+    dashboardImage: "/assets/oryn-dashboard.png",
+    live: "https://oryn-krtd.vercel.app/",
+    status: "wip",
+    progress: 80,
+    mono: "O",
+    monoColor: "#23211E",
+  },
+  {
+    title: "Anvay AI",
+    icon: "🔎",
+    iconColor: "blue",
+    description:
+      "AnvayAI — Full-stack conversational AI platform for equity and financial research, integrating multiple LLM providers (OpenAI, Google Gemini, NVIDIA Nemotron, MiniMax) with a BYOK model and cost-aware routing to keep analysis affordable. An in-conversation artifacts engine turns natural-language queries into live financial spreadsheets, comparison tables, and reports with formula resolution, backed by an AI tool-calling layer, a portfolio/holdings-tracking module with market data lookups, and project-based research workspaces with versioned Postgres migrations.",
+    stack: ["Next.js", "TypeScript", "React", "PostgreSQL", "Drizzle ORM", "OpenAI", "Google Gemini", "NVIDIA Nemotron", "MiniMax"],
+    metrics: [
+      { value: "Multi", label: "LLM" },
+      { value: "BYOK", label: "cost control" },
+      { value: "AI", label: "artifacts" },
+    ],
+    image: "/assets/anvayAI.png",
+    dashboardImage: "/assets/anvayAI-dashboard.png",
+    live: "https://anvay-ai.vercel.app/",
+  },
   {
     title: "Orcabase",
     icon: "🧠",
@@ -104,8 +145,8 @@ export const projects: Project[] = [
     icon: "🏠",
     iconColor: "purple",
     description:
-      "A full-stack platform connecting users with local service providers, featuring service booking, role-based dashboards, and scalable backend APIs.",
-    stack: ["React.js", "Node.js", "Express.js", "MongoDB", "JWT Auth", "RBAC"],
+      "A full-stack platform connecting users with local service providers. Providers pay for a subscription plan via Razorpay to get listed and receive customer leads directly on their dashboard, then close the booking with the customer over WhatsApp. Built with role-based dashboards for users, providers, and admins, and scalable backend APIs.",
+    stack: ["React.js", "Node.js", "Express.js", "MongoDB", "JWT Auth", "RBAC", "Razorpay", "WhatsApp"],
     metrics: [
       { value: "MERN", label: "stack" },
       { value: "RBAC", label: "roles" },
@@ -131,22 +172,22 @@ export const projects: Project[] = [
     github: "https://github.com/rushour21/car_rental",
     live: "https://car-rental-woad-nu.vercel.app/",
   },
-  {
-    title: "DineManager",
-    icon: "Utensils",
-    iconColor: "purple",
-    description:
-      "Built a real-time admin dashboard and ordering system with live metrics, nested routing, and full-stack integration. Cron jobs automate analytics and status updates.",
-    stack: ["React.js", "Node.js", "Recharts", "Cron Jobs", "Nested Routes", "MongoDB"],
-    metrics: [
-      { value: "RT", label: "metrics" },
-      { value: "Cron", label: "jobs" },
-      { value: "Chart", label: "analytics" },
-    ],
-    image: "/assets/dinemanager.png",
-    github: "https://github.com/rushour21/DineManager",
-    live: "https://dine-manager.vercel.app/",
-  },
+  // {
+  //   title: "DineManager",
+  //   icon: "Utensils",
+  //   iconColor: "purple",
+  //   description:
+  //     "Built a real-time admin dashboard and ordering system with live metrics, nested routing, and full-stack integration. Cron jobs automate analytics and status updates.",
+  //   stack: ["React.js", "Node.js", "Recharts", "Cron Jobs", "Nested Routes", "MongoDB"],
+  //   metrics: [
+  //     { value: "RT", label: "metrics" },
+  //     { value: "Cron", label: "jobs" },
+  //     { value: "Chart", label: "analytics" },
+  //   ],
+  //   image: "/assets/dinemanager.png",
+  //   github: "https://github.com/rushour21/DineManager",
+  //   live: "https://dine-manager.vercel.app/",
+  // },
   {
     title: "QueryFlow",
     icon: "🎫",
@@ -194,10 +235,22 @@ export const projects: Project[] = [
     image: "/assets/shopsphere.png",
     github: "https://github.com/rushour21/ShopSphere",
     live: "https://shop-sphere-pied.vercel.app/",
-  }
+  },
 ];
-
 export const experiences: Experience[] = [
+  {
+    period: "Apr 2026 — Present",
+    role: "Associate Software Engineer",
+    company: "Wargstech",
+    location: "Pune, India",
+    points: [
+      "Building an in-house video-on-demand processing and streaming pipeline — upload, transcoding into adaptive bitrate renditions, storage, and delivery — replacing a third-party managed video service and cutting streaming costs by 45%.",
+      "Gathered requirements from a state council client and translated them into a working portal for practitioner registration and provisional certificate issuance, supporting bulk batch registration via Excel uploads, batch payments, and end-to-end application tracking.",
+      "Architected the React frontend around reusable, composable components with centralised state and route-level code splitting, keeping dashboard interactions responsive across large datasets.",
+      "Deployed and configured backend services on AWS EC2 with S3-backed storage, and authored internal deployment documentation covering launch templates, user data scripts, and auto scaling.",
+      "Triage and resolve production issues across the stack — API failures, data inconsistencies, and deployment misconfigurations — using log analysis and reproducible test cases to keep client impact minimal.",
+    ],
+  },
   {
     period: "Oct 2025 — Dec 2025",
     role: "Web Developer Intern",
@@ -256,7 +309,7 @@ export const knowledgeBase: Record<string, string> = {
   nexer:
     "NEXER is a developer networking platform — think LinkedIn but built for devs. Rushabh built real-time 1-on-1 and group chat using Socket.IO, connection discovery, and private collaboration groups. It uses the full MERN stack with Redux Toolkit for state management and JWT for auth.",
   gharseva:
-    "GharSeva is a full-stack Local Services Platform that connects users with nearby service providers (plumbers, electricians, etc.). It features service booking, role-based dashboards for users and providers, and a scalable Node.js/MongoDB backend.",
+    "GharSeva is a full-stack Local Services Platform that connects users with nearby service providers (plumbers, electricians, etc.). Providers pay for a subscription plan via Razorpay to get listed and receive customer leads directly on their dashboard, then close the booking with the customer over WhatsApp. It features role-based dashboards for users, providers, and admins, and a scalable Node.js/MongoDB backend.",
   shopsphere:
     "ShopSphere (StoreRating) is a full-stack application where users can rate and review local stores. It uses Prisma ORM with PostgreSQL, features secure JWT authentication, protected admin routes, and real-time dashboard analytics.",
   "car rental":
@@ -268,7 +321,7 @@ export const knowledgeBase: Record<string, string> = {
   trakx:
     "Trakx (Meeting Manager) is an availability and meeting slot management system. It features custom middleware for protected routes, clean dashboard UI, and efficient state management using the MERN stack.",
   default:
-    "Great question! Rushabh is a Full Stack Developer specializing in Node.js, React, Next.js, and AI/RAG systems. He's built production SaaS platforms (Orcabase), networking tools (NEXER), and various utility platforms like GharSeva and DineManager. Want to know about a specific project or skill?",
+    "Great question! Rushabh is a Software Engineer specializing in Node.js, React, Next.js, and AI/RAG systems. He's built production SaaS platforms (Orcabase), networking tools (NEXER), and various utility platforms like GharSeva and DineManager. Want to know about a specific project or skill?",
 };
 
 export function getBotReply(msg: string): string {

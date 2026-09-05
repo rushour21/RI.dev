@@ -1,11 +1,26 @@
 import type { Metadata } from "next";
+import { Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import "@/styles/globals.css";
 
+const instrumentSans = Instrument_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Rushabh Ingle — Full Stack Developer",
+  title: "Rushabh Ingle — Software Engineer",
   description:
-    "Full Stack Developer specializing in Node.js, React, Next.js, and AI/RAG systems. Building scalable web applications, REST APIs, and intelligent SaaS platforms.",
-  keywords: ["Full Stack Developer", "Node.js", "React", "Next.js", "AI", "RAG", "Pune"],
+    "Software engineer specializing in Node.js, React, Next.js, and AI/RAG systems. Building scalable APIs, real-time systems, and retrieval-grounded AI products.",
+  keywords: ["Software Engineer", "Node.js", "React", "Next.js", "AI", "RAG", "Pune"],
   icons: {
     icon: "/favicon.png",
   },
@@ -13,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${instrumentSans.variable} ${jetbrainsMono.variable}`}>
       <body>{children}</body>
     </html>
   );
