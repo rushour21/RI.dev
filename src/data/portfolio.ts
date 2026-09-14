@@ -110,16 +110,33 @@ export const projects: Project[] = [
     live: "https://anvay-ai.vercel.app/",
   },
   {
+    title: "PRGuard",
+    icon: "🛡️",
+    iconColor: "cyan",
+    description:
+      "A GitHub App that automatically reviews pull requests using AI, combining RAG-based codebase context retrieval with LLM analysis to catch bugs, security issues, and logic flaws before merge. Retrieves relevant codebase context via vector search (not just the raw diff), posts findings as real PR comments with per-repo custom rules and Slack/Teams notifications, and runs on a durable, retryable Inngest pipeline — diff fetch, hunk-aware chunking, vector embedding, context retrieval, LLM generation, and comment posting, each step independently retryable. Includes a full dashboard for PR history, repo management, analytics, and custom rule configuration.",
+    stack: ["Next.js 16", "TypeScript", "PostgreSQL", "Prisma ORM", "Inngest", "OpenRouter", "Pinecone", "Octokit", "GitHub Apps", "better-auth"],
+    metrics: [
+      { value: "RAG", label: "codebase-aware" },
+      { value: "CI", label: "webhook-driven" },
+      { value: "Retry", label: "durable jobs" },
+    ],
+    image: "/assets/prguard.png",
+    dashboardImage: "/assets/prguard-dashboard.png",
+    github: "https://github.com/rushour21/prguard",
+    live: "https://prguard.vercel.app",
+  },
+  {
     title: "Orcabase",
     icon: "🧠",
     iconColor: "blue",
     description:
-      "AI-powered SaaS platform enabling organizations to deploy embeddable chatbots and securely query internal databases using natural language. Multi-tenant workspace system with RAG-based intelligence and human-in-the-loop validation.",
+      "AI-powered SaaS platform where organizations deploy an embeddable RAG chatbot (Qdrant-backed document embeddings) for customer-facing support, with a human-in-the-loop \"human mode\" that escalates unanswered questions to a live admin from the dashboard. Separately, the admin dashboard has its own text-to-SQL chat, built on an agentic workflow that turns natural-language questions into SQL against the organization's database, with a lightweight Docker image handling the actual query execution securely inside the client's own infrastructure.",
     stack: ["React.js", "Node.js", "PostgreSQL", "OpenAI SDK", "RAG", "Qdrant", "AWS EC2", "Docker", "OAuth 2.0"],
     metrics: [
-      { value: "Multi", label: "tenant" },
-      { value: "RAG", label: "powered" },
-      { value: "SQL", label: "guardrails" },
+      { value: "RAG", label: "chatbot" },
+      { value: "Text-to-SQL", label: "agentic" },
+      { value: "Docker", label: "secure exec" },
     ],
     image: "/assets/orcabase.png",
     live: "https://orcabase.in/",
@@ -305,7 +322,9 @@ export const contactInfo = {
 
 export const knowledgeBase: Record<string, string> = {
   orcabase:
-    "Orcabase is Rushabh's flagship project — an AI-powered SaaS platform where companies can deploy embeddable chatbots and query their internal databases using natural language. It features multi-tenant workspaces, RAG-based document search using Qdrant, and a Docker-based VPC agent for secure database connectivity. The backend runs on AWS EC2 with HTTPS, and the frontend is on Vercel.",
+    "Orcabase is Rushabh's flagship project — an AI-powered SaaS platform. It has two separate chat surfaces: a customer-facing embeddable RAG chatbot (Qdrant-backed document embeddings) with a 'human mode' that escalates unanswered questions to a live admin, and a completely separate text-to-SQL chat on the admin dashboard, built on an agentic workflow that turns natural-language questions into SQL against the organization's own database. A lightweight Docker image handles the actual query execution securely inside the client's infrastructure. The backend runs on AWS EC2 with HTTPS, and the frontend is on Vercel.",
+  prguard:
+    "PRGuard is a GitHub App that automatically reviews pull requests using AI — combining RAG-based codebase context retrieval (via Pinecone vector search, not just the raw diff) with LLM analysis (via OpenRouter) to catch bugs, security issues, and logic flaws before merge. It posts findings as real PR comments with per-repo custom rules and Slack/Teams notifications, runs on a durable, retryable Inngest pipeline, and has a full dashboard for PR history, repo management, and analytics.",
   nexer:
     "NEXER is a developer networking platform — think LinkedIn but built for devs. Rushabh built real-time 1-on-1 and group chat using Socket.IO, connection discovery, and private collaboration groups. It uses the full MERN stack with Redux Toolkit for state management and JWT for auth.",
   gharseva:
@@ -326,6 +345,8 @@ export const knowledgeBase: Record<string, string> = {
 
 export function getBotReply(msg: string): string {
   const m = msg.toLowerCase();
+  if (m.includes("prguard") || m.includes("pr review") || m.includes("pull request") || m.includes("github app"))
+    return knowledgeBase["prguard"];
   if (m.includes("orcabase") || m.includes("chatbot") || m.includes("rag") || m.includes("database"))
     return knowledgeBase["orcabase"];
   if (m.includes("nexer") || m.includes("networking") || m.includes("socket"))
