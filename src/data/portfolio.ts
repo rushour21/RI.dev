@@ -123,7 +123,6 @@ export const projects: Project[] = [
     ],
     image: "/assets/prguard.png",
     dashboardImage: "/assets/prguard-dashboard.png",
-    github: "https://github.com/rushour21/prguard",
     live: "https://prguard.vercel.app",
   },
   {
