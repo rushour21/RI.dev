@@ -237,22 +237,22 @@ export const projects: Project[] = [
     github: "https://github.com/rushour21/trakx",
     live: "https://trakx-five.vercel.app/",
   },
-  {
-    title: "ShopSphere",
-    icon: "⭐",
-    iconColor: "blue",
-    description:
-      "A fullstack application where users can rate and review stores, with secure authentication, protected admin routes, and real-time dashboard analytics.",
-    stack: ["React.js", "Node.js", "Prisma ORM", "PostgreSQL", "JWT Auth"],
-    metrics: [
-      { value: "ORM", label: "Prisma" },
-      { value: "RBAC", label: "admin" },
-      { value: "Live", label: "analytics" },
-    ],
-    image: "/assets/shopsphere.png",
-    github: "https://github.com/rushour21/ShopSphere",
-    live: "https://shop-sphere-pied.vercel.app/",
-  },
+  // {
+  //   title: "ShopSphere",
+  //   icon: "⭐",
+  //   iconColor: "blue",
+  //   description:
+  //     "A fullstack application where users can rate and review stores, with secure authentication, protected admin routes, and real-time dashboard analytics.",
+  //   stack: ["React.js", "Node.js", "Prisma ORM", "PostgreSQL", "JWT Auth"],
+  //   metrics: [
+  //     { value: "ORM", label: "Prisma" },
+  //     { value: "RBAC", label: "admin" },
+  //     { value: "Live", label: "analytics" },
+  //   ],
+  //   image: "/assets/shopsphere.png",
+  //   github: "https://github.com/rushour21/ShopSphere",
+  //   live: "https://shop-sphere-pied.vercel.app/",
+  // },
 ];
 export const experiences: Experience[] = [
   {
